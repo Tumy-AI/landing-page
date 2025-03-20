@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 interface GradientTextProps {
     children: ReactNode;
@@ -15,10 +16,20 @@ export default function GradientText({
     animationSpeed = 8,
     showBorder = false,
 }: GradientTextProps) {
+    const [mounted, setMounted] = useState(false);
+    const { resolvedTheme } = useTheme();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const gradientStyle = {
         backgroundImage: `linear-gradient(to right, ${colors.join(", ")})`,
         animationDuration: `${animationSpeed}s`,
     };
+
+    // Determine background color based on theme
+    const bgColor = mounted && resolvedTheme === 'dark' ? 'black' : 'white';
 
     return (
         <div
@@ -33,13 +44,14 @@ export default function GradientText({
                     }}
                 >
                     <div
-                        className="absolute inset-0 bg-black rounded-[1.25rem] z-[-1]"
+                        className="absolute inset-0 rounded-[1.25rem] z-[-1]"
                         style={{
-                            width: "calc(100% - 2px)",
-                            height: "calc(100% - 2px)",
+                            width: "calc(100% - 4px)",
+                            height: "calc(100% - 4px)",
                             left: "50%",
                             top: "50%",
                             transform: "translate(-50%, -50%)",
+                            backgroundColor: bgColor,
                         }}
                     ></div>
                 </div>

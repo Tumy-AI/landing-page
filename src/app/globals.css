@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@layer base {
+  body {
+    @apply bg-white
+  }
+
+  .dark body {
+    @apply bg-black;
+  }
+}
+
 @layer components {
   .test {
     border: 1px solid red;
