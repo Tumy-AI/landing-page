@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from 'next-themes';
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
+import { ibmPlexMono } from './fonts';
 
 export const metadata: Metadata = {
   title: "Tumy.ai",
@@ -14,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning className={`${ibmPlexMono.variable}`}>
       <body className="min-w-[400px] max-w-[1920px] mx-auto px-8">
         <ThemeProvider attribute={'class'}>
           <Navbar />

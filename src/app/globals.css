@@ -3,7 +3,37 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Ajusta la máscara según el modo */
+.spotlight-mask {
+  /* Por defecto (modo claro): haz que el mask comience un poco más alejado del centro para dejar ver el grid */
+  mask: radial-gradient(circle at 50% 50%, black 10%, transparent 70%);
+  -webkit-mask: radial-gradient(circle at 50% 50%, black 10%, transparent 70%);
+}
+
+.dark .spotlight-mask {
+  /* En modo oscuro: máscara original, para que el efecto spotlight sea más marcado */
+  mask: radial-gradient(circle at 50% 50%, black 0%, transparent 70%);
+  -webkit-mask: radial-gradient(circle at 50% 50%, black 0%, transparent 70%);
+}
+
+
+/* Configuración de fuentes */
 @layer base {
+  :root {
+    --font-ibm: var(--font-ibm-plex-mono);
+  }
+
+  /* Definir la familia de fuentes mono */
+  .font-mono {
+    font-family: var(--font-ibm), monospace;
+  }
+
+  /* Alias específico para IBM Plex Mono */
+  .font-ibm {
+    font-family: var(--font-ibm), monospace;
+  }
+
+  /* Estilos base existentes */
   body {
     @apply bg-white
   }
@@ -149,7 +179,24 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@theme inline {
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+}
+
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
   }
 }

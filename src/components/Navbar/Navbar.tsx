@@ -16,7 +16,7 @@ const navbarItems: NavbarItem[] = [
     { title: 'Productos', href: '/products' },
     { title: 'Soluciones', href: '/solutions' },
     { title: 'Recursos', href: '/resources' },
-    { title: 'Sobre nosotros', href: '/about' },
+    { title: 'Nosotros', href: '/about' },
 ];
 
 export default function Navbar() {
@@ -86,7 +86,7 @@ export default function Navbar() {
                             >
                                 <Link
                                     href={item.href}
-                                    className="text-2xl font-medium text-white hover:text-gray-300 transition-colors"
+                                    className="text-2xl font-ibm font-bold text-white hover:text-gray-300 transition-colors"
                                     onClick={() => setMenuOpen(false)}
                                 >
                                     {item.title}
@@ -96,7 +96,7 @@ export default function Navbar() {
                         {/* Opción de cambiar tema en el menú móvil como una opción más */}
                         <li className={`transform transition-all duration-300 delay-400 ${menuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
                             <button
-                                className="text-2xl font-medium text-white hover:text-gray-300 transition-colors flex items-center gap-2"
+                                className="text-2xl font-ibm font-bold text-white hover:text-gray-300 transition-colors flex items-center gap-2"
                                 onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
                             >
                                 {resolvedTheme === 'dark' ? (
@@ -117,7 +117,7 @@ export default function Navbar() {
             </div>
 
             {/* Barra de navegación normal */}
-            <nav className="flex items-center justify-between w-full z-40 relative py-4">
+            <nav className="flex items-center justify-between w-full z-40 relative py-4 select-none">
                 <Link className='flex items-center gap-2' href={"/"}>
                     <Image
                         src="/logos/logo.webp"
@@ -126,12 +126,12 @@ export default function Navbar() {
                         height={50}
                         className={`${resolvedTheme === 'dark' ? 'invert' : ''}`}
                     />
-                    <h2 className="text-2xl font-bold">Tumy.ai</h2>
+                    <h2 className="text-xl font-ibm font-bold">Tumy.ai</h2>
                 </Link>
                 <ul className="hidden md:flex space-x-4 lg:space-x-6">
                     {navbarItems.map((item, index) => (
                         <li key={index}>
-                            <Link href={item.href} className="text-md hover:text-gray-400 transition-colors">
+                            <Link href={item.href} className="text-md hover:text-gray-400 transition-colors font-ibm font-bold">
                                 {item.title}
                             </Link>
                         </li>
@@ -140,12 +140,12 @@ export default function Navbar() {
                 <div className="md:hidden flex items-center gap-2">
                     {/* Solo botón de contacto y menú en la barra de navegación móvil */}
                     <GradientText
-                        colors={["#ff8d00", "#7b00ff", "#ff8d00"]}
+                        colors={["#03dd00", "#00d7ce", "#03dd00"]}
                         animationSpeed={8}
                         showBorder={true}
                         className="p-2"
                     >
-                        Contactanos
+                        Contáctanos
                     </GradientText>
 
                     <button
@@ -158,12 +158,12 @@ export default function Navbar() {
                 </div>
                 <div className='hidden md:flex flex-row w-fit gap-2'>
                     <GradientText
-                        colors={["#ff8d00", "#7b00ff", "#ff8d00"]}
+                        colors={["#03dd00", "#00d7ce", "#03dd00"]}
                         animationSpeed={8}
                         showBorder={true}
                         className="p-2"
                     >
-                        Contactanos
+                        Contáctanos
                     </GradientText>
                     <button
                         className={`rounded-full transition duration-300 px-2 ease-in-out ${resolvedTheme === 'dark' ? 'text-gray-200 hover:bg-gray-900' : 'text-black hover:bg-gray-300'}`}
