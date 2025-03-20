@@ -221,7 +221,7 @@ export function Navbar() {
                           )}
                         />
                       </div>
-                      <h1 className="text-xl font-bold">Tumy.ai</h1>
+                      <h1 className="text-xl font-bold">tumy.ai</h1>
                     </Link>
                     <SheetClose asChild>
                       <Button variant="ghost" size="icon">
