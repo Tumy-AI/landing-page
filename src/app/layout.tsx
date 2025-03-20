@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className="min-w-[400px] max-w-[1920px] mx-auto px-8 pt-4">
+      <body className="min-w-[400px] max-w-[1920px] mx-auto px-8">
         <ThemeProvider attribute={'class'}>
           <Navbar />
           {children}

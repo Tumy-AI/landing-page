@@ -117,7 +117,7 @@ export default function Navbar() {
             </div>
 
             {/* Barra de navegación normal */}
-            <nav className="flex items-center justify-between w-full z-40 relative">
+            <nav className="flex items-center justify-between w-full z-40 relative py-4">
                 <Link className='flex items-center gap-2' href={"/"}>
                     <Image
                         src="/logos/logo.webp"
@@ -128,7 +128,7 @@ export default function Navbar() {
                     />
                     <h2 className="text-2xl font-bold">Tumy.ai</h2>
                 </Link>
-                <ul className="hidden md:flex space-x-4">
+                <ul className="hidden md:flex space-x-4 lg:space-x-6">
                     {navbarItems.map((item, index) => (
                         <li key={index}>
                             <Link href={item.href} className="text-md hover:text-gray-400 transition-colors">
