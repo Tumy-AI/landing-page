@@ -107,7 +107,25 @@ const industriasItems = [
 ];
 
 export function Navbar() {
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+  
+  // Montar el componente una vez que está en el cliente
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  // Decidir si aplicar la inversión solo después de montar el componente en el cliente
+  const shouldInvertLogo = React.useMemo(() => {
+    if (!mounted) return false;
+    
+    // Si está usando el tema del sistema, verificar si el sistema está en modo oscuro
+    if (theme === "system") {
+      return systemTheme === "dark";
+    }
+    
+    return theme === "dark";
+  }, [theme, systemTheme, mounted]);
   
   return (
     <div className="border-b">
@@ -121,7 +139,7 @@ export function Navbar() {
                 fill
                 className={cn(
                   "object-contain",
-                  theme === "dark" ? "filter invert" : ""
+                  shouldInvertLogo ? "filter invert" : ""
                 )}
               />
             </div>
@@ -199,7 +217,7 @@ export function Navbar() {
                           fill
                           className={cn(
                             "object-contain",
-                            theme === "dark" ? "filter invert" : ""
+                            shouldInvertLogo ? "filter invert" : ""
                           )}
                         />
                       </div>
