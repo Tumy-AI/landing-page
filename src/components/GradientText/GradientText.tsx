@@ -1,5 +1,8 @@
+"use client";
+
 import React, { ReactNode, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 
 interface GradientTextProps {
     children: ReactNode;
@@ -7,6 +10,7 @@ interface GradientTextProps {
     colors?: string[];
     animationSpeed?: number;
     showBorder?: boolean;
+    redirectTo?: string;
 }
 
 export default function GradientText({
@@ -15,6 +19,7 @@ export default function GradientText({
     colors = ["#ffaa40", "#9c40ff", "#ffaa40"],
     animationSpeed = 8,
     showBorder = false,
+    redirectTo = "/contact",
 }: GradientTextProps) {
     const [mounted, setMounted] = useState(false);
     const { resolvedTheme } = useTheme();
@@ -32,8 +37,9 @@ export default function GradientText({
     const bgColor = mounted && resolvedTheme === 'dark' ? 'black' : 'white';
 
     return (
-        <div
+        <Link
             className={`relative mx-auto flex max-w-fit flex-row items-center justify-center rounded-[1.25rem] font-ibm font-mono backdrop-blur transition-shadow duration-500 overflow-hidden cursor-pointer ${className}`}
+            href={redirectTo}
         >
             {showBorder && (
                 <div
@@ -67,6 +73,6 @@ export default function GradientText({
             >
                 {children}
             </div>
-        </div>
+        </Link>
     );
 }
