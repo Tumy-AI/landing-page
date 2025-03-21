@@ -7,10 +7,11 @@ export default function Introduction() {
       <Spotlight
         className="-top-40 left-0 md:-top-20 md:left-60"
         fill="white"
+        height="100vh"
       />
 
       {/* Contenedor principal */}
-      <div className="relative flex flex-col md:flex-row justify-center w-full gap-6 py-40 md:gap-10 px- md:px-16 ">
+      <div className="relative flex flex-col md:flex-row justify-center w-full gap-6 py-10 md:py-28w3 md:gap-10 px- md:px-16 test">
         {/* Texto a la izquierda */}
         <div className="w-full md:w-1/2 z-10 space-y-6 text-center md:text-left">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
