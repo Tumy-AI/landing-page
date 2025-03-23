@@ -50,7 +50,7 @@ export default function ServicesAdaptive() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center w-full gap-6 py-20 px-4 md:px-16 bg-gray-50 dark:bg-black">
+    <div className="flex flex-col items-center justify-center w-full gap-6 py-20 px-4 md:px-16 dark:bg-black">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 text-black dark:text-white">
         <span className="font-bold">+Servicios</span>{" "}
         <span className="font-light">

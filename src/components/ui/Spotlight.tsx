@@ -10,14 +10,14 @@ type SpotlightProps = {
 export const Spotlight = ({ className, fill, height = "100vh" }: SpotlightProps) => {
     return (
         <div
-            className="absolute top-0 left-0 w-full pointer-events-none"
+            className="absolute top-0 left-0 w-full pointer-events-none -z-10"
             style={{ height }} // Aplicamos la altura personalizada aquí
         >
             {/* Div de fondo con degradado para difuminar los bordes */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/[0.96] to-transparent dark:via-black/[0.96] via-white/[0.96]">
                 <div className="absolute inset-0 [background-size:40px_40px]
                     dark:[background-image:linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)]
-                    [background-image:linear-gradient(to_right,rgba(0,0,0,0.2)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.2)_1px,transparent_1px)]
+                    [background-image:linear-gradient(to_right,rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.1)_1px,transparent_1px)]
                     spotlight-mask"
                 />
             </div>

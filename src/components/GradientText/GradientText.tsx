@@ -38,7 +38,7 @@ export default function GradientText({
 
     return (
         <Link
-            className={`relative mx-auto flex max-w-fit flex-row items-center justify-center rounded-[1.25rem] font-ibm font-mono backdrop-blur transition-shadow duration-500 overflow-hidden cursor-pointer ${className}`}
+            className={`relative mx-auto flex max-w-fit flex-row items-center justify-center rounded-[1.25rem] font-mono backdrop-blur transition-shadow duration-500 overflow-hidden cursor-pointer ${className}`}
             href={redirectTo}
         >
             {showBorder && (

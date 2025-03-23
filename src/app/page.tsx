@@ -1,6 +1,6 @@
 
-import Introduction from '@/components/home/Introduction';
-import Services from '@/components/home/Services';
+import Introduction from '@/pages/Home/Introduction';
+import Services from '@/pages/Home/Services';
 export default function Home() {
   return (
     <>

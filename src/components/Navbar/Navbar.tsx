@@ -63,7 +63,7 @@ export default function Navbar() {
         <>
             {/* Overlay de pantalla completa con animación */}
             <div
-                className={`fixed inset-0 bg-black/70 backdrop-blur-md z-50 md:hidden transition-all duration-300 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                className={`z-100 fixed inset-0 bg-black/70 backdrop-blur-md md:hidden transition-all duration-300 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
                     }`}
             >
                 <div className={`flex flex-col h-full p-6 transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'
@@ -86,7 +86,7 @@ export default function Navbar() {
                             >
                                 <Link
                                     href={item.href}
-                                    className="text-2xl font-ibm font-bold text-white hover:text-gray-300 transition-colors"
+                                    className="text-2xl font-bold text-white hover:text-gray-300 transition-colors"
                                     onClick={() => setMenuOpen(false)}
                                 >
                                     {item.title}
@@ -96,7 +96,7 @@ export default function Navbar() {
                         {/* Opción de cambiar tema en el menú móvil como una opción más */}
                         <li className={`transform transition-all duration-300 delay-400 ${menuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
                             <button
-                                className="text-2xl font-ibm font-bold text-white hover:text-gray-300 transition-colors flex items-center gap-2"
+                                className="text-2xl  font-bold text-white hover:text-gray-300 transition-colors flex items-center gap-2"
                                 onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
                             >
                                 {resolvedTheme === 'dark' ? (
@@ -126,12 +126,12 @@ export default function Navbar() {
                         height={50}
                         className={`${resolvedTheme === 'dark' ? 'invert' : ''}`}
                     />
-                    <h2 className="text-xl font-ibm font-bold">Tumy.ai</h2>
+                    <h2 className="text-xl font-bold">Tumy.ai</h2>
                 </Link>
                 <ul className="hidden md:flex space-x-4 lg:space-x-6">
                     {navbarItems.map((item, index) => (
                         <li key={index}>
-                            <Link href={item.href} className="text-md hover:text-gray-400 transition-colors font-ibm font-bold">
+                            <Link href={item.href} className="text-md hover:text-gray-400 transition-colors font-bold">
                                 {item.title}
                             </Link>
                         </li>

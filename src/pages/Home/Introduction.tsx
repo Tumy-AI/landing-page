@@ -4,12 +4,6 @@ import { Button } from "@/components/ui/button";
 export default function Introduction() {
   return (
     <>
-      <Spotlight
-        className="-top-40 left-0 md:-top-20 md:left-60"
-        fill="white"
-        height="90vh"
-      />
-
       {/* Contenedor principal */}
       <div className="relative flex flex-col md:flex-row justify-center w-full gap-6 py-10 md:py-28 md:gap-10 md:px-16">
         {/* Texto a la izquierda */}

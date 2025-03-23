@@ -3,6 +3,8 @@ import { ThemeProvider } from 'next-themes';
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import { ibmPlexMono } from './fonts';
+import { Toaster } from "@/components/Toaster/Toaster";
+import { Spotlight } from "@/components/ui/Spotlight";
 
 export const metadata: Metadata = {
   title: "Tumy.ai",
@@ -16,8 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning className={`${ibmPlexMono.variable}`}>
-      <body className="min-w-[400px] max-w-[1920px] mx-auto px-8">
+      <body className="min-w-[400px] max-w-[1920px] mx-auto px-8 font-ibm">
         <ThemeProvider attribute={'class'}>
+          <Spotlight
+            className="-top-40 left-0 md:-top-20 md:left-60"
+            fill="white"
+            height="90vh"
+          />
+          <Toaster />
           <Navbar />
           {children}
         </ThemeProvider>
