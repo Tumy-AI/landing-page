@@ -159,7 +159,7 @@ const Sparkles = () => {
             borderRadius: "50%",
             zIndex: 1,
           }}
-          className="bg-gray-400 dark:bg-white"
+          className="bg-gray-800 dark:bg-white"
         />
       ))}
     </div>
