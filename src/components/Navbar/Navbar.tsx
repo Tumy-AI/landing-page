@@ -22,11 +22,31 @@ const navbarItems: NavbarItem[] = [
 export default function Navbar() {
     const [mounted, setMounted] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const { setTheme, resolvedTheme } = useTheme();
 
     useEffect(() => {
         setMounted(true);
     }, []);
+
+    // Detectar scroll para cambiar apariencia del navbar
+    useEffect(() => {
+        const handleScroll = () => {
+            const isScrolled = window.scrollY > 10;
+            if (isScrolled !== scrolled) {
+                setScrolled(isScrolled);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Verificar posición inicial
+        handleScroll();
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [scrolled]);
 
     // Prevenir el scroll cuando el menú está abierto
     useEffect(() => {
@@ -96,7 +116,7 @@ export default function Navbar() {
                         {/* Opción de cambiar tema en el menú móvil como una opción más */}
                         <li className={`transform transition-all duration-300 delay-400 ${menuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'}`}>
                             <button
-                                className="text-2xl  font-bold text-white hover:text-gray-300 transition-colors flex items-center gap-2"
+                                className="text-2xl font-bold text-white hover:text-gray-300 transition-colors flex items-center gap-2"
                                 onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
                             >
                                 {resolvedTheme === 'dark' ? (
@@ -116,8 +136,15 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* Barra de navegación normal */}
-            <nav className="flex items-center justify-between w-full z-40 relative py-4 select-none">
+            {/* Barra de navegación fixed con efecto de blur al hacer scroll */}
+            <nav
+                className={`fixed top-0 left-0 right-0 flex items-center justify-between w-full z-40 py-4 px-4 md:px-6 lg:px-8 select-none transition-all duration-300 ${scrolled
+                    ? `${resolvedTheme === 'dark'
+                        ? 'bg-black/50 backdrop-blur-lg shadow-md'
+                        : 'bg-white/50 backdrop-blur-lg shadow-md'}`
+                    : 'bg-transparent'
+                    }`}
+            >
                 <Link className='flex items-center gap-2' href={"/"}>
                     <Image
                         src="/logos/logo.webp"
@@ -139,14 +166,16 @@ export default function Navbar() {
                 </ul>
                 <div className="md:hidden flex items-center gap-2">
                     {/* Solo botón de contacto y menú en la barra de navegación móvil */}
-                    <GradientText
-                        colors={["#03dd00", "#00d7ce", "#03dd00"]}
-                        animationSpeed={8}
-                        showBorder={true}
-                        className="p-2"
-                    >
-                        Contáctanos
-                    </GradientText>
+                    <Link href="/contact">
+                        <GradientText
+                            colors={["#03dd00", "#00d7ce", "#03dd00"]}
+                            animationSpeed={8}
+                            showBorder={true}
+                            className="p-2"
+                        >
+                            Contáctanos
+                        </GradientText>
+                    </Link>
 
                     <button
                         className="p-2 z-50 relative transition-transform duration-300"
@@ -157,14 +186,16 @@ export default function Navbar() {
                     </button>
                 </div>
                 <div className='hidden md:flex flex-row w-fit gap-2'>
-                    <GradientText
-                        colors={["#03dd00", "#00d7ce", "#03dd00"]}
-                        animationSpeed={8}
-                        showBorder={true}
-                        className="p-2"
-                    >
-                        Contáctanos
-                    </GradientText>
+                    <Link href="/contact">
+                        <GradientText
+                            colors={["#03dd00", "#00d7ce", "#03dd00"]}
+                            animationSpeed={8}
+                            showBorder={true}
+                            className="p-2"
+                        >
+                            Contáctanos
+                        </GradientText>
+                    </Link>
                     <button
                         className={`rounded-full transition duration-300 px-2 ease-in-out ${resolvedTheme === 'dark' ? 'text-gray-200 hover:bg-gray-900' : 'text-black hover:bg-gray-300'}`}
                         onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
@@ -177,6 +208,9 @@ export default function Navbar() {
                     </button>
                 </div>
             </nav>
+
+            {/* Div espaciador para compensar el navbar fixed */}
+            <div className="h-20"></div>
         </>
     );
 }
