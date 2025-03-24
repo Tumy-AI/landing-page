@@ -1,111 +1,69 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion } from "motion/react"; // Changed from framer-motion to match your project
-import { cn } from "@/lib/utils";
-
-// Icons for each advantage
+import { motion } from "framer-motion";
 import { Palette, Shield, Sliders, Coins, Users } from "lucide-react";
-
-// Reuse the existing CardStack component instead of importing it
-import { CardStack } from "@/components/ui/card-stack";
-
-export default function Advantages() {
-  return (
-    <div className="h-[40rem] flex items-center justify-center w-full">
-      <CardStack items={VENTAJAS} />
-    </div>
-  );
-}
-
-// Small utility to highlight the content of specific section
-export const Highlight = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <span
-      className={cn(
-        "font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-700/[0.2] dark:text-emerald-500 px-1 py-0.5",
-        className
-      )}
-    >
-      {children}
-    </span>
-  );
-};
 
 const VENTAJAS = [
   {
-    id: 0,
-    name: "Creación desde Cero",
-    designation: "Diseño Único",
-    content: (
-      <div className="flex justify-between items-start">
-        <p className="pr-4">
-          Diseñamos páginas web <Highlight>personalizadas</Highlight> sin depender de plantillas, 
-          asegurando un diseño único y exclusivo.
-        </p>
-        <Palette className="text-emerald-600 w-12 h-12 flex-shrink-0" />
-      </div>
-    ),
+    texto: "Diseños únicos sin plantillas.",
+    icono: <Palette className="text-emerald-400 w-24 h-24" />,
   },
   {
-    id: 1,
-    name: "Mayor Seguridad",
-    designation: "Protección Garantizada",
-    content: (
-      <div className="flex justify-between items-start">
-        <p className="pr-4">
-          Diseñamos páginas web <Highlight>personalizadas</Highlight> sin depender de plantillas, 
-          asegurando un diseño único y exclusivo.
-        </p>
-        <Shield className="text-emerald-600 w-12 h-12 flex-shrink-0" />
-      </div>
-    ),
+    texto: "Mayor seguridad y estabilidad.",
+    icono: <Shield className="text-emerald-400 w-24 h-24" />,
   },
   {
-    id: 2,
-    name: "Flexibilidad Total",
-    designation: "Adaptación Perfecta",
-    content: (
-      <div className="flex justify-between items-start">
-        <p className="pr-4">
-          Te acompañamos en sesiones <Highlight>personalizadas</Highlight> para entender tu visión 
-          y convertirla en un proyecto a medida.
-        </p>
-        <Sliders className="text-emerald-600 w-12 h-12 flex-shrink-0" />
-      </div>
-    ),
+    texto: "Total flexibilidad en cada proyecto.",
+    icono: <Sliders className="text-emerald-400 w-24 h-24" />,
   },
   {
-    id: 3,
-    name: "Inversión Inteligente",
-    designation: "Rentabilidad a Largo Plazo",
-    content: (
-      <div className="flex justify-between items-start">
-        <p className="pr-4">
-          Aunque el desarrollo personalizado puede parecer más costoso al inicio, a largo plazo 
-          <Highlight> reduce gastos</Highlight> en licencias y mantenimiento.
-        </p>
-        <Coins className="text-emerald-600 w-12 h-12 flex-shrink-0" />
-      </div>
-    ),
+    texto: "Inversión rentable a largo plazo.",
+    icono: <Coins className="text-emerald-400 w-24 h-24" />,
   },
   {
-    id: 4,
-    name: "Atención Personalizada",
-    designation: "Servicio a Medida",
-    content: (
-      <div className="flex justify-between items-start">
-        <p className="pr-4">
-          Te acompañamos en sesiones <Highlight>personalizadas</Highlight> para entender tu visión 
-          y convertirla en un proyecto a medida.
-        </p>
-        <Users className="text-emerald-600 w-12 h-12 flex-shrink-0" />
-      </div>
-    ),
+    texto: "Atención personalizada en todo momento.",
+    icono: <Users className="text-emerald-400 w-24 h-24" />,
   },
 ];
+
+export default function Advantages() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % VENTAJAS.length);
+    }, 3000); // Cambia cada 3 segundos
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="h-[40rem] w-full flex flex-col items-center justify-center gap-10 px-10 text-center">
+      {/* Ícono Animado */}
+      <motion.div
+        key={index}
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        {VENTAJAS[index].icono}
+      </motion.div>
+
+      {/* Texto Animado */}
+      <h1 className="text-white text-4xl font-bold">
+        +Ofrecemos{" "}
+        <motion.span
+          key={index} // Clave única para animación fluida
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.5 }}
+          className="text-emerald-400"
+        >
+          {VENTAJAS[index].texto}
+        </motion.span>
+      </h1>
+    </div>
+  );
+}
