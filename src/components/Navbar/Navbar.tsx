@@ -83,7 +83,7 @@ export default function Navbar() {
         <>
             {/* Overlay de pantalla completa con animación */}
             <div
-                className={`z-100 fixed inset-0 bg-black/70 backdrop-blur-md md:hidden transition-all duration-300 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                className={`z-200 fixed inset-0 bg-black/70 backdrop-blur-md md:hidden transition-all duration-300 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
                     }`}
             >
                 <div className={`flex flex-col h-full p-6 transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'
@@ -138,7 +138,7 @@ export default function Navbar() {
 
             {/* Barra de navegación fixed con efecto de blur al hacer scroll */}
             <nav
-                className={`fixed top-0 left-0 right-0 flex items-center justify-between w-full z-40 py-4 px-4 md:px-6 lg:px-8 select-none transition-all duration-300 ${scrolled
+                className={`fixed top-0 left-0 right-0 flex items-center justify-between w-full z-100 py-4 px-4 md:px-6 lg:px-8 select-none transition-all duration-300 ${scrolled
                     ? `${resolvedTheme === 'dark'
                         ? 'bg-black/50 backdrop-blur-lg shadow-md'
                         : 'bg-white/50 backdrop-blur-lg shadow-md'}`

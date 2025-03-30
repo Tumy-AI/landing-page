@@ -51,7 +51,7 @@ export default function ContactPage() {
                 duration: 3000,
             });
 
-            //reset();
+            reset();
         } catch (error) {
             toast.error("Error al enviar el mensaje. Inténtalo de nuevo.", {
                 duration: 3000,
@@ -66,7 +66,7 @@ export default function ContactPage() {
                 Estamos aquí para ayudarte en todo momento, no dudes en contactarnos por los siguientes medios:
             </p>
 
-            <div className="flex flex-col w-full lg:flex-row space-x-0 space-y-8 lg:space-x-8 lg:space-y-0 z-50 mt-8">
+            <div className="flex flex-col w-full lg:flex-row space-x-0 space-y-8 lg:space-x-8 lg:space-y-0 z-50 m-8">
                 {/* Contact Form Section */}
                 <div className="flex flex-col w-full lg:w-1/2 items-center">
                     <h2 className="text-2xl font-bold mb-8">
