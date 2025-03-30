@@ -28,9 +28,9 @@ const SocialMedias: SocialMediaCardProps[] = [
 
 // Common styles extracted as constants
 const inputClasses = `
-  w-full p-3 rounded-lg border-2 outline-none focus:ring-2 focus:ring-opacity-50
-  dark:bg-neutral-900 dark:border-neutral-700 dark:focus:border-neutral-500 dark:focus:ring-neutral-400
-  bg-white border-neutral-600 focus:border-gray-400 focus:ring-gray-300
+  w-full p-4 rounded-lg border border-neutral-300 outline-none focus:ring-2 focus:ring-opacity-50
+  dark:bg-neutral-800 dark:border-neutral-700 dark:focus:border-neutral-500 dark:focus:ring-neutral-400
+  bg-white focus:border-gray-400 focus:ring-gray-300 text-base
 `;
 
 const errorInputClasses = "border-red-500 focus:border-red-500 focus:ring-red-300";
@@ -60,19 +60,22 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="flex flex-col items-center p-2 lg:p-4 space-y-8">
-            <h1 className="text-2xl font-bold text-center lg:text-left lg:text-4xl lg:ml-8 z-50">Contáctanos</h1>
-            <p className="text-md text-center lg:text-left lg:text-lg lg:ml-8 z-50">
-                Estamos aquí para ayudarte en todo momento, no dudes en contactarnos por los siguientes medios:
-            </p>
+        <div className="flex flex-col items-center min-h-screen">
+            <div className="w-full max-w-6xl px-6 py-24 mx-auto">
+                {/* Header Section */}
+                <div className="mb-16 text-center lg:text-left">
+                    <h1 className="text-3xl font-bold lg:text-5xl mb-4">Contáctanos</h1>
+                    <p className="text-lg text-neutral-600 dark:text-neutral-300 max-w-3xl">
+                        Estamos aquí para ayudarte en todo momento, no dudes en contactarnos por los siguientes medios:
+                    </p>
+                </div>
 
-            <div className="flex flex-col w-full lg:flex-row space-x-0 space-y-8 lg:space-x-8 lg:space-y-0 z-50 m-8">
-                {/* Contact Form Section */}
-                <div className="flex flex-col w-full lg:w-1/2 items-center">
-                    <h2 className="text-2xl font-bold mb-8">
-                        Escríbenos un mensaje
-                    </h2>
-                    <div className="w-full mt-2">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+                    {/* Contact Form Section */}
+                    <div className="flex flex-col">
+                        <h2 className="text-2xl font-bold mb-8">
+                            Escríbenos un mensaje
+                        </h2>
                         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-6 w-full">
                             {/* Name Input */}
                             <div className="flex flex-col space-y-2">
@@ -123,8 +126,8 @@ export default function ContactPage() {
                                                 message: "El mensaje debe tener al menos 10 caracteres"
                                             }
                                         })}
-                                        placeholder="Mensaje"
-                                        rows={5}
+                                        placeholder="¿Cómo podemos ayudarte?"
+                                        rows={6}
                                         className={`${inputClasses} resize-none ${errors.mensaje ? errorInputClasses : ''}`}
                                     />
                                     {errors.mensaje && (
@@ -133,17 +136,20 @@ export default function ContactPage() {
                                 </div>
                             </div>
 
-                            {/* Submit Button */}
+                            {/* Submit Button - Changed to black and white */}
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className={`w-full p-3 rounded-lg font-bold dark:text-white text-black transition-all duration-300
-                    bg-gradient-to-r border-2 dark:border-white border-neutral-600 dark:hover:bg-neutral-900 
-                    hover:bg-neutral-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                className={`w-full p-4 rounded-lg font-medium text-base
+                                  bg-black dark:bg-white text-white dark:text-black
+                                  border border-black dark:border-white
+                                  hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white
+                                  transition-all duration-300
+                                  ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                             >
                                 {isSubmitting ? (
                                     <span className="flex items-center justify-center">
-                                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                         </svg>
@@ -153,28 +159,49 @@ export default function ContactPage() {
                             </button>
                         </form>
                     </div>
+
+                    {/* Social Media Section */}
+                    <div className="flex flex-col">
+                        <h2 className="text-2xl font-bold mb-8">
+                            ... o contáctanos a través de nuestras redes sociales
+                        </h2>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 w-full">
+                            {SocialMedias.map((socialMedia, index) => (
+                                <SpotlightCard
+                                    key={index}
+                                    spotlightColor="rgba(150, 150, 150, 0.15)"
+                                    className="bg-transparent dark:bg-neutral-900/40 p-6 rounded-lg backdrop-blur-sm hover:shadow-lg transition-all duration-300 cursor-pointer border border-neutral-200 dark:border-neutral-800"
+                                >
+                                    <div className="flex flex-col items-center space-y-4">
+                                        {/* Changed icon color to white */}
+                                        <socialMedia.icon className="text-4xl text-white" />
+                                        <p className="text-md font-medium text-center break-words overflow-hidden w-full">
+                                            {socialMedia.username}
+                                        </p>
+                                    </div>
+                                </SpotlightCard>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
-                {/* Social Media Section */}
-                <div className="flex flex-col w-full lg:w-1/2 items-center">
-                    <h2 className="text-2xl font-bold mb-6">
-                        ... o contáctanos a través de nuestras redes sociales
-                    </h2>
-                    <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-8 w-full">
-                        {SocialMedias.map((socialMedia, index) => (
-                            <SpotlightCard
-                                key={index}
-                                spotlightColor="rgba(150, 150, 150, 0.15)"
-                                className="bg-transparent p-3 hover:shadow-md transition-all duration-300 cursor-pointer"
-                            >
-                                <div className="flex flex-col items-center space-y-3">
-                                    <socialMedia.icon className="text-4xl" />
-                                    <p className="text-md font-medium text-center break-words overflow-hidden w-full">
-                                        {socialMedia.username}
-                                    </p>
-                                </div>
-                            </SpotlightCard>
-                        ))}
+                {/* Stats Section (similar to Vercel example) */}
+                <div className="border-t border-b border-neutral-200 dark:border-neutral-800 grid grid-cols-1 md:grid-cols-2 my-12">
+                    <div className="p-12 border-b md:border-b-0 md:border-r border-neutral-200 dark:border-neutral-800">
+                        <div className="text-2xl font-bold mb-2">+500</div>
+                        <p className="text-neutral-600 dark:text-neutral-300">Clientes satisfechos</p>
+                    </div>
+                    <div className="p-12">
+                        <div className="text-2xl font-bold mb-2">98% de respuestas</div>
+                        <p className="text-neutral-600 dark:text-neutral-300">en menos de 24 horas</p>
+                    </div>
+                </div>
+
+                {/* Testimonial Section */}
+                <div className="mb-24">
+                    <div className="p-8 border border-neutral-200 dark:border-neutral-800 rounded-lg">
+                        <p className="text-lg italic mb-4">&quot;Tumy AI ha transformado la manera en que gestionamos nuestras consultas y nos ha permitido llegar al mercado más rápido.&quot;</p>
+                        <p className="font-medium">Empresa Cliente</p>
                     </div>
                 </div>
             </div>

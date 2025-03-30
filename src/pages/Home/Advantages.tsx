@@ -1,8 +1,7 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Terminal, AnimatedSpan, TypingAnimation } from "@/components/magicui/terminal";
 import { Palette, Shield, Sliders, Coins, Users } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { useTheme } from "next-themes";
 
 const VENTAJAS = [
@@ -10,40 +9,38 @@ const VENTAJAS = [
     id: 1,
     titulo: "+Diseño Único",
     texto: "Creamos diseños exclusivos sin plantillas genéricas.",
-    icono: <Palette className="w-12 h-12" />,
+    icono: <Palette className="w-5 h-5" />,
   },
   {
     id: 2,
     titulo: "+Seguridad Garantizada",
     texto: "Mayor seguridad y estabilidad en todas las soluciones.",
-    icono: <Shield className="w-12 h-12" />,
+    icono: <Shield className="w-5 h-5" />,
   },
   {
     id: 3,
     titulo: "+Flexibilidad Total",
     texto: "Adaptamos cada elemento a tus necesidades específicas.",
-    icono: <Sliders className="w-12 h-12" />,
+    icono: <Sliders className="w-5 h-5" />,
   },
   {
     id: 4,
     titulo: "+Inversión Inteligente",
     texto: "Soluciones rentables que reducen costos a largo plazo.",
-    icono: <Coins className="w-12 h-12" />,
+    icono: <Coins className="w-5 h-5" />,
   },
   {
     id: 5,
     titulo: "Atención Personalizada",
     texto: "Acompañamiento constante durante todo el proceso.",
-    icono: <Users className="w-12 h-12" />,
+    icono: <Users className="w-5 h-5" />,
   },
 ];
 
 export default function Advantages() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -51,125 +48,60 @@ export default function Advantages() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDirection(1);
       setActiveIndex((prevIndex) => (prevIndex + 1) % VENTAJAS.length);
-    }, 4000);
+    }, 3500);
     return () => clearInterval(interval);
   }, []);
 
-  const handleCardClick = (index: number) => {
-    setDirection(index > activeIndex ? 1 : -1);
-    setActiveIndex(index);
-
-    if (cardRef.current) {
-      cardRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  };
-
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-      scale: 0.8,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      zIndex: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction > 0 ? -1000 : 1000,
-      opacity: 0,
-      scale: 0.8,
-      zIndex: 0,
-    }),
-  };
-
   if (!mounted) return null;
 
-  const isDarkMode = theme === "dark";
-
   return (
-    <div className={`py-16 px-4 ${isDarkMode ? "bg-black" : "bg-white"}`}>
-      <div className="max-w-7xl mx-auto">
-        <div className="relative h-72 mb-12">
-          <AnimatePresence initial={false} custom={direction}>
-            <motion.div
-              ref={cardRef}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.5 },
-              }}
-              className="absolute w-full h-full flex justify-center items-center"
-            >
-              <Card
-                className={`w-full max-w-2xl overflow-hidden ${
-                  isDarkMode
-                    ? "bg-black border-gray-800 shadow-md"
-                    : "bg-white border-gray-200 shadow-sm"
-                }`}
-              >
-                <CardContent className="p-0">
-                  <div className="grid grid-cols-1 md:grid-cols-3 h-full">
-                    <div
-                      className={`${
-                        isDarkMode
-                          ? "bg-black border-r border-gray-800"
-                          : "bg-gray-50 border-r border-gray-100"
-                      } flex items-center justify-center p-6`}
-                    >
-                      <div
-                        className={`${
-                          isDarkMode ? "bg-black" : "bg-gray-100"
-                        } p-4 rounded-full`}
-                      >
-                        <div
-                          className={isDarkMode ? "text-white" : "text-black"}
-                        >
-                          {VENTAJAS[activeIndex].icono}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="md:col-span-2 p-6 flex flex-col justify-center">
-                      <h3 className="text-xl font-bold text-emerald-500 mb-2">
-                        {VENTAJAS[activeIndex].titulo}
-                      </h3>
-                      <p
-                        className={`${
-                          isDarkMode ? "text-white" : "text-black"
-                        } text-base`}
-                      >
-                        {VENTAJAS[activeIndex].texto}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </AnimatePresence>
+    <div className="w-full py-20 px-4 md:px-16 bg-white dark:bg-black">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
+        {/* Texto a la izquierda */}
+        <div className="flex-1 text-center lg:text-left">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black dark:text-white mb-6">
+            +Ventajas de trabajar con nosotros
+          </h2>
+          <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-md">
+            Todas son ventajas, sin plantillas, con seguridad y un equipo que se adapta a ti.
+          </p>
         </div>
 
-        <div className="flex justify-center gap-3">
-          {VENTAJAS.map((ventaja, index) => (
-            <button
-              key={ventaja.id}
-              onClick={() => handleCardClick(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === activeIndex
-                  ? "bg-emerald-500 scale-125"
-                  : isDarkMode
-                  ? "bg-gray-700"
-                  : "bg-gray-300"
-              }`}
-              aria-label={`Ver ventaja: ${ventaja.titulo}`}
-            />
-          ))}
+        {/* Terminal a la derecha */}
+        <div className="flex-1 w-full">
+          <Terminal className="w-full max-w-2xl mx-auto">
+          
+
+            <AnimatedSpan delay={1500} className="text-green-500 flex items-center gap-2">
+              <span>{VENTAJAS[0].icono}</span>
+              <span>{VENTAJAS[0].titulo} — {VENTAJAS[0].texto}</span>
+            </AnimatedSpan>
+
+            <AnimatedSpan delay={3000} className="text-green-500 flex items-center gap-2">
+              <span>{VENTAJAS[1].icono}</span>
+              <span>{VENTAJAS[1].titulo} — {VENTAJAS[1].texto}</span>
+            </AnimatedSpan>
+
+            <AnimatedSpan delay={4500} className="text-green-500 flex items-center gap-2">
+              <span>{VENTAJAS[2].icono}</span>
+              <span>{VENTAJAS[2].titulo} — {VENTAJAS[2].texto}</span>
+            </AnimatedSpan>
+
+            <AnimatedSpan delay={6000} className="text-green-500 flex items-center gap-2">
+              <span>{VENTAJAS[3].icono}</span>
+              <span>{VENTAJAS[3].titulo} — {VENTAJAS[3].texto}</span>
+            </AnimatedSpan>
+
+            <AnimatedSpan delay={7500} className="text-green-500 flex items-center gap-2">
+              <span>{VENTAJAS[4].icono}</span>
+              <span>{VENTAJAS[4].titulo} — {VENTAJAS[4].texto}</span>
+            </AnimatedSpan>
+
+            <TypingAnimation delay={9000} className="text-muted-foreground">
+              ¡Tu proyecto en buenas manos!
+            </TypingAnimation>
+          </Terminal>
         </div>
       </div>
     </div>

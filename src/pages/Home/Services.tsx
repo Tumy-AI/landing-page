@@ -2,12 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { RiGlobalLine } from "react-icons/ri";
-import { FaStore } from "react-icons/fa6";
-import { FaGears } from "react-icons/fa6";
+import { FaStore, FaGears } from "react-icons/fa6";
 import { MdOutlineInventory } from "react-icons/md";
-import { FaWhatsapp } from "react-icons/fa";
-import { FaRegStar } from "react-icons/fa";
-import { cn } from "@/lib/utils";
+import { FaWhatsapp, FaRegStar } from "react-icons/fa";
 
 export default function ServicesAdaptive() {
   const services = [
@@ -50,7 +47,7 @@ export default function ServicesAdaptive() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center w-full gap-6 py-20 px-4 md:px-16 ">
+    <div className="flex flex-col items-center justify-center w-full gap-6 py-20 px-4 md:px-16">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 text-black dark:text-white">
         <span className="font-bold">+Servicios</span>{" "}
         <span className="font-light">
@@ -67,7 +64,6 @@ export default function ServicesAdaptive() {
   );
 }
 
-// Adaptive Card component con soporte para light/dark mode
 interface Service {
   icon: React.ReactNode;
   title: string;
@@ -76,42 +72,35 @@ interface Service {
 
 const AdaptiveCard = ({ service }: { service: Service }) => {
   return (
-    <div className="w-full">
-      <motion.div
-        whileHover={{ scale: 1.05, y: -5 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="group relative overflow-hidden rounded-xl bg-white dark:bg-black p-8 h-full border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 shadow-sm hover:shadow-md dark:shadow-gray-900/30"
-      >
-        {/* Efecto de brillo animado */}
-        <div className="absolute inset-0 -translate-y-full group-hover:translate-y-0 bg-gradient-to-b from-white/20 to-transparent dark:from-white/10 blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+    <motion.div
+      whileHover={{ scale: 1.05, y: -5 }}
+      transition={{ type: "spring", stiffness: 250, damping: 20 }}
+      className="group relative overflow-hidden rounded-2xl bg-white dark:bg-black p-8 h-full border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 shadow-md hover:shadow-xl transition-shadow duration-500"
+    >
+      <div className="absolute inset-0 -translate-y-full group-hover:translate-y-0 bg-gradient-to-b from-black/10 to-transparent dark:from-white/10 blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
 
-        {/* Contenedor del icono */}
-        <div className="relative z-10 mb-6 flex justify-center">
-          <div className="rounded-full p-4 bg-gray-100 dark:bg-black border border-gray-200 dark:border-gray-700 group-hover:border-gray-400 dark:group-hover:border-white/30 transition-colors duration-500">
-            <div className="text-black dark:text-white group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-500">
-              {service.icon}
-            </div>
+      <div className="relative z-10 mb-6 flex justify-center">
+        <div className="rounded-full p-5 bg-gray-100 dark:bg-zinc-900 border border-gray-300 dark:border-gray-700 shadow-inner">
+          <div className="text-4xl text-gray-800 dark:text-white transition-colors duration-500">
+            {service.icon}
           </div>
         </div>
+      </div>
 
-        {/* Contenido */}
-        <div className="relative z-10">
-          <h3 className="text-xl font-bold text-gray-800 dark:text-white text-center mb-3 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">
-            {service.title}
-          </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300 text-center mb-6 group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-300">
-            {service.description}
-          </p>
-        </div>
+      <div className="relative z-10">
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-4 transition-colors duration-300">
+          {service.title}
+        </h3>
+        <p className="text-base text-gray-600 dark:text-gray-300 text-center leading-relaxed transition-colors duration-300">
+          {service.description}
+        </p>
+      </div>
 
-        {/* Animación de sparkles */}
-        <Sparkles />
-      </motion.div>
-    </div>
+      <Sparkles />
+    </motion.div>
   );
 };
 
-// Componente Sparkles: genera los valores aleatorios en el cliente
 const Sparkles = () => {
   const [stars, setStars] = useState<
     {
@@ -159,7 +148,7 @@ const Sparkles = () => {
             borderRadius: "50%",
             zIndex: 1,
           }}
-          className="bg-gray-950 dark:bg-white"
+          className="bg-black dark:bg-white"
         />
       ))}
     </div>
