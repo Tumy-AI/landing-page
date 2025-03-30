@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Palette, Shield, Sliders, Coins, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -43,8 +43,8 @@ export default function Advantages() {
   const [direction, setDirection] = useState(1);
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  // Para evitar problemas de hidratación
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -54,13 +54,16 @@ export default function Advantages() {
       setDirection(1);
       setActiveIndex((prevIndex) => (prevIndex + 1) % VENTAJAS.length);
     }, 4000);
-
     return () => clearInterval(interval);
   }, []);
 
   const handleCardClick = (index: number) => {
     setDirection(index > activeIndex ? 1 : -1);
     setActiveIndex(index);
+
+    if (cardRef.current) {
+      cardRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
   };
 
   const variants = {
@@ -83,19 +86,17 @@ export default function Advantages() {
     }),
   };
 
-  // No renderizar hasta que se monte el componente para evitar problemas de hidratación
   if (!mounted) return null;
 
   const isDarkMode = theme === "dark";
 
   return (
     <div className={`py-16 px-4 ${isDarkMode ? "bg-black" : "bg-white"}`}>
-    
       <div className="max-w-7xl mx-auto">
         <div className="relative h-72 mb-12">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
-              key={VENTAJAS[activeIndex].id}
+              ref={cardRef}
               custom={direction}
               variants={variants}
               initial="enter"
