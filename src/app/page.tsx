@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Introduction />
       <Services />
-      <Advantages />
+      <Advantages /> {/* Arregla tu wbd Auky hdpt */}
       <Technologies />
     </>
   );
